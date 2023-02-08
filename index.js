@@ -35,7 +35,7 @@ MongoDB.start()
 
 // JWT
 //New user registration
-app.post('api/v1/addNewUser', async (req, res) => {
+app.post('/api/v1/addNewUser', async (req, res) => {
   const data = new usermodel({
     user: req.body.user,
     password: req.body.password,
@@ -48,7 +48,7 @@ app.post('api/v1/addNewUser', async (req, res) => {
 })
 
 
-app.get('api/v1/newUser', (req, res) => {
+app.get('/api/v1/newUser', (req, res) => {
   async.auto(
     {
       notes: function (cb) {
@@ -85,7 +85,7 @@ app.get('api/v1/newUser', (req, res) => {
 });
 
 // signup
-app.post('api/v1/signup', (req, res) => {
+app.post('/api/v1/signup', (req, res) => {
   
   async.auto(
     {
@@ -116,7 +116,7 @@ app.post('api/v1/signup', (req, res) => {
 
 
 //login
-app.post('api/v1/login', (req, res) => {
+app.post('/api/v1/login', (req, res) => {
   async.auto(
     {
       users: function (cb) {
@@ -149,13 +149,13 @@ app.post('api/v1/login', (req, res) => {
 
 
 //logout
-app.get('api/v1/logout', (req, res) => {
+app.get('/api/v1/logout', (req, res) => {
   res.cookie("authToken", "", { httpOnly: true }).send("Logged out!");
 });
 
 
 //fetching from cloud
-app.get('/newnote', (req, res) => {
+app.get('/api/v1/newnote', (req, res) => {
   async.auto({
     notes: function (cb) {
       noteModel.find().exec(function (err, notes) {
