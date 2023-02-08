@@ -155,7 +155,7 @@ app.get('api/v1/logout', (req, res) => {
 
 
 //fetching from cloud
-app.get('/newnote', verify,(req, res) => {
+app.get('/newnote', (req, res) => {
   async.auto({
     notes: function (cb) {
       noteModel.find().exec(function (err, notes) {
