@@ -108,7 +108,7 @@ app.get('/api/v1/newnote', (req, res) => {
 });
 
 //post api for mongodb ->inserting data
-app.post("/newnotePost", async (req, res) => {
+app.post('/api/v1/newnotePost', async (req, res) => {
   const data = new noteModel({
     description: req.body.description,
     title: req.body.title,
