@@ -91,7 +91,8 @@ app.get('/api/v1/logout', (req, res) => {
 app.get('/api/v1/newnote', (req, res) => {
   async.auto({
     notes: function (cb) {
-      noteModel.find().exec(function (err, notes) {
+    
+      noteModel.find({user:req.query.user}).exec(function (err, notes) {
         if (err) {
           return cb("Unable to fetch notes.");
         }
@@ -100,9 +101,11 @@ app.get('/api/v1/newnote', (req, res) => {
       });
     }}, 
    function (err, results) {
+
     if (err) {
       return res.status(403).json({ error: err });
     }
+    console.log("req",req.query);
     return res.json({ results: results.notes });
   });
 });
@@ -112,6 +115,7 @@ app.post('/api/v1/newnotePost', async (req, res) => {
   const data = new noteModel({
     description: req.body.description,
     title: req.body.title,
+    user:req.body.user
   });
   const val = await data.save();
   res.send("Note Sucessfully Created");
